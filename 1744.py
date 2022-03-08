@@ -4,21 +4,20 @@ input = sys.stdin.readline
 n = int(input())
 plus = []
 minus = []
-zero = []
 total = 0
 
 for _ in range(n):
     x = int(input())
     if x > 1:
         plus.append(x)
+    elif x == 1:
+        total += 1
     elif x < 1:
         minus.append(x)
-    elif x == 1:
-        # zero.append(x)
-        total += 1
+    
 
 plus.sort()
-minus.sort()
+minus.sort(reverse=True)
 
 if len(plus) % 2 == 0:
     for i in range(len(plus) - 1, -1, -2):
