@@ -34,5 +34,3 @@ for _ in range(t):
         level = max(level, le)
     
     print(level)
-
-
