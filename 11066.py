@@ -5,17 +5,13 @@ t = int(input())
 for _ in range(t):
     k = int(input())
     files = [0] + list(map(int, input().split()))
-    dp = [[0] * (k + 1) for _ in range(k + 1)]
-    ans = [0] * (k + 1) 
+    dp = [[0] * (k) for _ in range(k)]
 
-    files.sort()
-
-    for i in range(1, k + 1):
-        dp[i][0] = files[i]
-
-    for i in range(1, k+ 1):
-        for j in range(1, k + 1):
-            dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
-        
+    #누적합
+    total = [0]
+    for i in files:
+        total.append(total[-1] + i)
     
-print(dp)
+    for j in range(k):
+      for i in range(j):
+        print(i)
