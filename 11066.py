@@ -12,6 +12,4 @@ for _ in range(t):
     for i in files:
         total.append(total[-1] + i)
     
-    for j in range(k):
-      for i in range(j):
-        print(i)
+    
