@@ -36,11 +36,10 @@ def step_three(new_id):
 
 def step_4(new_id):
     new_id2 = ""
-    if new_id[0] == '.':
+    # if new_id[0] == '.':
 
     # if new_id[-1] == '.':
     #     print("dfsdfs")
-    # return new_id
+    return new_id2
 
-print(step_4(new_id))
-    
+print(step_one(new_id))
