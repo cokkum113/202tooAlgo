@@ -3,7 +3,6 @@ input = sys.stdin.readline
 
 n, m = map(int, input().split())
 
-
 a = n - m
 
 x = max(a, m)
