@@ -9,8 +9,6 @@ for _ in range(t):
     x = n % h
     y = n // h
 
-    print(x)
-
     if x == 0:
         print(100 *h + y)
     else:
