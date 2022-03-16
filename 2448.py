@@ -22,4 +22,3 @@ def make_star(x, y, n):
 ans = make_star(0, n - 1, n)
 for i in ans:
     print(''.join(i))
-    
