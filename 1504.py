@@ -34,8 +34,6 @@ def dijkstra(start):
     return distance
 
 
-
-
 start_dijkstra = dijkstra(1)
 v1_dijkstra = dijkstra(v1)
 v2_dijkstra = dijkstra(v2)
