@@ -11,6 +11,11 @@ sero = 2
 dae = 3
 ans = 0
 
+#가로일떄 갈수 이있는 방향키를 정의 해놓는게 좋음
+#둘다 x + 1. y + 1 이 n 보다 작아야함. 
+
+# 분기문 하나
+
 def dfs(x, y, a):
     global ans
     if x == n - 1 and y == n - 1:
