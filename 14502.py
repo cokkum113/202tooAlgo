@@ -61,3 +61,4 @@ for i in able_wall:
     if ans <= safe:
         ans = safe
 print(ans)
+
