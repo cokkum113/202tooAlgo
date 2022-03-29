@@ -79,21 +79,35 @@ def solution(priorities, location):
 #주식가격
 def solution(prices):
     answer = []
-    a = len(prices)
-    lo = prices[0]
+    for i in range(len(prices)):
+        cnt = 0
+        for j in range(i + 1, len(prices)):
+            if prices[i] > prices[j]:
+                cnt += 1
+                break
+            else:
+                cnt += 1
+        answer.append(cnt)
+    return answer
+
+#다리건너기
+from collections import deque
+def solution(bridge_length, weight, truck_weights):
+    bridge = deque([0] * bridge_length)
+    truck = deque(truck_weights)
     cnt = 0
     
-    for i in range(1, len(prices)):
-        if lo < prices[i]:
-            if cnt == 0:
-                ans = a - i
-                answer.append(ans)
-                lo = prices[i]
+    
+    while len(bridge) != 0:
+        
+        bridge.popleft()
+        cnt += 1
+        
+        if len(truck) != 0:
+            if truck[0] + sum(bridge) <= weight:
+                x = truck.popleft()
+                bridge.append(x)
             else:
-                ans = cnt
-                answer.append(ans)
-                cnt = 0
-        elif lo > prices[i]:
-            cnt += 1
-            
-    return answer
+                bridge.append(0)
+                    
+    return cnt
