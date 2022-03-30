@@ -13,42 +13,6 @@ def solution(array, commands):
 
     # 500 _ 1초가 안됨
 
-#가장 큰 수 #시초뜨는거 
-def solution(numbers):
-    answer = ''
-    nums = {}
-    for i in numbers:
-        x = i % 10
-        nums[i] = x
-    
-    nums = sorted(nums.items(), key= lambda x : x[1], reverse=True)
-    
-    for i in nums:
-        answer += str(i[0])
-    
-    
-    
-    return answer
-
-#가장 큰수 시초뜨는거
-def solution(numbers):
-    answer = ''
-    nums = []
-    
-    for i, val in enumerate(numbers):
-        #100000
-        x = val % 10
-        nums.append([str(x), i])
-
-    nums.sort(key = lambda x : x[0], reverse= True)
-    #Reverse하면 시간이 100000 * 100000 인가용? 그러면 10 ^ 10으로 시초 뜨는 건가요?
-    #이 방식은 3번째 방식으로 밖에 못 푸나용?
-    
-    for i in nums:
-        #100000
-        answer += str(numbers[i[1]])
-    
-    return answer
 
 #가장 큰 수 
 def solution(numbers):
@@ -58,7 +22,6 @@ def solution(numbers):
     answer = str(int(''.join(nums)))
     return answer
 ########이 방법 말고는 없는지
-
 
 
 # H - index
