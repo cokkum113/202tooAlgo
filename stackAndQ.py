@@ -123,3 +123,4 @@ def solution(bridge_length, weight, truck_weights):
                     
     return cnt
     #10^8 _ 1초가 안됨
+
