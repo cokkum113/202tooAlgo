@@ -67,3 +67,55 @@ def solution(number, k):
     answer = ''.join(a)
     
     return answer
+
+#구명보트
+def solution(people, limit):
+    cnt = 0
+    st = 0
+    end = len(people) - 1
+    people.sort()
+    while st <= end:
+        cnt += 1
+        if people[st] + people[end] <= limit:
+            st += 1
+        
+        end -= 1
+    return cnt
+
+#섬 연결하기 ######유니온파인드 질문
+def solution(n, costs):
+    answer = 0
+    costs.sort(key = lambda x : x[2])
+    parent = [i for i in range(n)]
+    for a, b, cost in costs:
+        if find(parent, a) != find(parent, b):
+            union(parent, a, b)
+            answer += cost
+    
+    
+    return answer
+def find(parent, n):
+    if parent[n] != n:
+        parent[n] = find(parent, parent[n])
+    return parent[n]
+
+def union(parent, a, b):
+    rootA = parent[a]
+    rootB = parent[b]
+    parent[rootA] = rootB
+
+
+#단속카메라
+def solution(routes):
+    answer = 0
+    routes.sort(key=lambda x : x[1])
+    cam = routes[0][1]
+    answer = 1
+    for i in range(1, len(routes)):
+        if cam < routes[i][0]:
+            cam = routes[i][1]
+            answer += 1
+        else:
+            continue
+            
+    return answer
