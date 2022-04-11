@@ -41,7 +41,7 @@ while True:
     delet_robot(robot_flag)
     robot_rotation(belts, robot_flag)
     put_robot(belts, robot_flag)
-    # delet_robot(robot_flag)
+    delet_robot(robot_flag)
 
     if belts.count(0) >= k:
         break
