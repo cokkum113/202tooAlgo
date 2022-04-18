@@ -66,7 +66,6 @@ def solution(m, n, puddles):
         graph[x - 1][y - 1] = 'z'
     graph[0][0] = 1
     
-    
     que = deque()
     que.append([0, 0])
     
