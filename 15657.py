@@ -1,7 +1,6 @@
 import sys
 input = sys.stdin.readline
 
-#비내림차순은 같을수 있음
 
 n, m = map(int, input().split())
 
