@@ -17,6 +17,3 @@ for i in range(m):
         print(indexing[s])
     else:
         print(names[int(s)])
-
-
-    
