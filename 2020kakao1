@@ -1,0 +1,27 @@
+from collections import defaultdict
+def solution(id_list, report, k):
+    names = dict()
+    ss = defaultdict(list)
+    answer = []
+    for i in id_list:
+        names[i] = 0
+    report = list(set(report))
+    for x in report:
+        for i in range(len(x)):
+            if x[i] == ' ':
+                y = x[i + 1 :]
+                names[y] += 1
+                ss[x[:i]].append(y)
+    stop = []
+    for i in id_list:
+        if names[i] >= k:
+            stop.append(i)
+    answer = [0] * len(id_list)
+    for i in range(len(id_list)):
+        if id_list[i] in ss:
+            for j in ss[id_list[i]]:
+                if j in stop:
+                    answer[i] += 1
+    return answer                    
+     
+
