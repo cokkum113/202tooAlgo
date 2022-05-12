@@ -1,10 +1,11 @@
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10**5)
 
 n = int(input())
 s = input().rstrip()
 
-maxi = 0
+maxi = -10**10
 total = int(s[0])
 
 def backtracking(index, total):
