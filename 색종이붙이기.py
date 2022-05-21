@@ -54,6 +54,7 @@ def backtracking(x, y, cnt):
                 for i in range(x, x + k + 1):
                     for j in range(y, y + k + 1):
                         graph[i][j] = 0
+                        # 색종이 덮기 
 
                 paper[k] += 1
                 backtracking(x, y + k + 1, cnt + 1)
@@ -61,6 +62,7 @@ def backtracking(x, y, cnt):
                 for i in range(x, x + k + 1):
                     for j in range(y, y + k + 1):
                         graph[i][j] = 1
+                        # 덮은 색종이 빼기
 
     else:
         #붙일 수 없는 상황이면 다음 열로 넘어가게해야함
