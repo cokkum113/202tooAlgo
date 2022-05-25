@@ -5,10 +5,13 @@ input = sys.stdin.readline
 n = int(input())
 m = int(input())
 
+x = 0
 if m != 0:
     broken = list(map(int, input().split()))
+
 elif n != 100 and m == 0:
-    print(len(str(n)))
+    x = min(abs(100 -n), len(str(n)))
+    print(x)
     exit(0)
 
 diff = int(1e9)
