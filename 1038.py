@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10**9)
 
 cnt = 0
 n = int(input())
@@ -33,7 +34,7 @@ def backtracking(index):
     for i in range(index, 1000001):
         if check_decres(i):
             cnt += 1
-            backtracking(i + 1)
+            backtracking(index + 1)
         else:
             backtracking(i + 1)
 
