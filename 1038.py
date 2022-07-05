@@ -3,17 +3,16 @@ input = sys.stdin.readline
 from itertools import combinations
 
 n = int(input())
-
-answers = []
+ans = []
 
 for i in range(1, 11):
-    for combi in combinations(range(0, 10), i):
-        xx = list(combi)
+    for c in combinations(range(0, 10), i):
+        xx = list(c)
         xx.sort(reverse=True)
-        answers.append(int(''.join(map(str, xx))))
-
-answers.sort()
+        ans.append(int(''.join(map(str, xx))))
+    
+ans.sort()
 try:
-    print(answers[n])
+    print(ans[n])
 except:
     print(-1)
