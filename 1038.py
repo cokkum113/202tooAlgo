@@ -4,15 +4,14 @@ from itertools import combinations
 
 n = int(input())
 ans = []
-
 for i in range(1, 11):
     for c in combinations(range(0, 10), i):
-        xx = list(c)
-        xx.sort(reverse=True)
-        ans.append(int(''.join(map(str, xx))))
+        combi = list(c)
+        combi.sort(reverse=True)
+        ans.append(int("".join(map(str, combi))))
     
 ans.sort()
-try:
-    print(ans[n])
-except:
+if n >=  1023:
     print(-1)
+else:
+    print(ans[n])
