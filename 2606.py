@@ -2,10 +2,6 @@ import sys
 input = sys.stdin.readline
 from collections import deque
 
-# 오른쪽, 왼쪽, 위, 아래
-dx = [0, 0, 1, -1]
-dy = [1, -1, 0, 0]
-
 n = int(input())
 ss = int(input())
 
