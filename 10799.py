@@ -14,11 +14,8 @@ for i in range(len(s)):
     else:
         if s[i - 1] == '(':
             stick_cnt -= 1
-            #레이저여서 빼준 것
             ans += stick_cnt
         else:
             stick_cnt -=1
             ans += 1
 print(ans)
-
-        
