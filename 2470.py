@@ -18,6 +18,9 @@ total = nums[lo] + nums[hi]
 # 또한 abs로만 해결을 하려고 했던 것도 문제였다. 
 
 while lo < hi:
+    # if lo == hi:
+    #     break
+
     if abs(total) < mini:
         mini = abs(total)
         anslist.append([nums[lo], nums[hi]])
@@ -29,13 +32,16 @@ while lo < hi:
     elif total > 0:
         # 0에 더 가까워져야하니까 lo를 +시켜야한다
         # 음수 + 양수 인데 0보다 큰 값이니까 양수 쪽을 줄인다.  
+        total -= nums[hi]
         hi -= 1
-        total = nums[hi] + nums[lo]
+        total += nums[hi]
 
     elif total < 0:
         # 0보다 작을 때는 음수쪽이 크니까 음수의 인덱스를 올린다. 
+        total -= nums[lo]
         lo += 1
-        total = nums[hi] + nums[lo]
+        total += nums[lo]
+    
     
 
 if anslist:
