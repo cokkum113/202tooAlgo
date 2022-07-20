@@ -21,7 +21,6 @@ def bfs(x, y):
                 visited[nx][ny] = True
 
 
-# 몇번 bfs가 도는 지 체크, 그럴려면, 1들의 위치를 알아야함
 t = int(input())
 for _ in range(t):
     ans = 0

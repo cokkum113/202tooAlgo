@@ -8,5 +8,3 @@ cb = [1] * b
 
 aa = int(''.join(map(str, ca)))
 bb = int(''.join(map(str, cb)))
-
-print(bb % aa)
