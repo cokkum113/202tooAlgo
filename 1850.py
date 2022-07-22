@@ -1,10 +1,22 @@
 import sys
 input = sys.stdin.readline
 
-a, b = map(int, input().split())
+ss= list(map(int, input().split()))
+ss.sort()
+a = ss[0]
+b = ss[1]
 
-ca = [1] * a
-cb = [1] * b
+ca = int('1' * a)
+cb = int('1' * b)
 
-aa = int(''.join(map(str, ca)))
-bb = int(''.join(map(str, cb)))
+def gcd(x, y):
+    while y > 0:
+        x, y = y, x%y
+    return x
+
+print(gcd(ca, cb))
+
+# while cb > 0:
+#     ca, cb = cb, ca%cb
+
+# print(ca)
