@@ -1,47 +1,41 @@
+from audioop import mul
 import sys
 input = sys.stdin.readline
 
-a, b = map(int, input().split())
-matrix = []
-for _ in range(a):
-    matrix.append(list(map(int, input().split())))
-
-# 이진수
+n, b = map(int, input().split())
 b = bin(b)[2:]
 
-# 항등행렬
-identity_matrix = [[0] * a for _ in range(a)]
-for i in range(a):
-    for j in range(a):
+matrix = []
+for _ in range(n):
+    matrix.append(list(map(int, input().split())))
+
+for i in range(n):
+    for j in range(n):
+        matrix[i][j] %= 1000
+
+def multiple(A, B):
+    result = [[0] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                result[i][j] += A[i][k] * B[k][j]
+    
+    for i in range(n):
+        for j in range(n):
+            result[i][j] %= 1000
+    return result
+
+identity_matrix = [[0] * n for _ in range(n)]
+for i in range(n):
+    for j in range(n):
         if i == j:
             identity_matrix[i][j] = 1
 
-# 곱셈 함수
-def multiple(A, B):
-    result = [[0] * a for _ in range(a)]
-    for i in range(a):
-        for j in range(a):
-            for k in range(a):
-                result[i][j] += A[i][k] * B[k][j]
-    
-    for i in range(a):
-        for j in range(a):
-            result[i][j] %= 1000
-    
-    return result
+for i in b:
+    if i == '1':
+        identity_matrix=multiple(multiple(identity_matrix, identity_matrix), matrix)
+    else:
+        identity_matrix=multiple(identity_matrix, identity_matrix)
 
-# 2진법 자릿수만큼 제곱해주고, 제곱한 행렬끼리 곱해주면된다.
-answer_matrix = identity_matrix
-# b = b[::-1]
-# for i in b:
-#     if i == '1':
-#         while i != 0:
-for i in range(len(b)):
-    if b[-i-1] == '1':
-        while i != 0:
-            matrix = multiple(matrix, matrix)
-            i -= 1
-        answer_matrix = multiple(answer_matrix, matrix)
-
-for i in answer_matrix:
+for i in identity_matrix:
     print(*i)
