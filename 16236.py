@@ -3,71 +3,75 @@ input = sys.stdin.readline
 from collections import deque
 
 n = int(input())
-graph = [list(map(int, input().split())) for _ in range(n)]
-
-def find_start():
-    for i in range(n):
-        for j in range(n):
-            if graph[i][j] == 9:
-                st_x = i
-                st_y = j
-    return st_x, st_y
+graph = []
+for _ in range(n):
+    graph.append(list(map(int, input().split())))
 
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
-baby_shark= 2
 
-def bfs(x, y, babay_shark):
+ans = 0
+
+# 최소값을 구하기 위해서는 cnt값을 가지고 이동
+def bfs(x, y, shark_size):
     que = deque()
-    move = 0
-    que.append([x, y, move])
+    que.append([x, y, 0])
     visited = [[False] * n for _ in range(n)]
     visited[x][y] = True
 
     fish = []
+    
     while que:
-        status = que.popleft()
-        for i in range(4):
-            nx = status[0] + dx[i]
-            ny = status[1] + dy[i]
+        xx, yy, cnt = que.popleft()
+        for d in range(4):
+            nx = xx + dx[d]
+            ny = yy + dy[d]
 
-            if 0<= nx < n and 0<= ny < n and visited[nx][ny] == False:
+            if 0 <= nx < n and 0 <= ny < n and visited[nx][ny] == False:
+                if graph[nx][ny] < shark_size and graph[nx][ny] != 0:
+                    fish.append([nx, ny, cnt + 1])
+                    que.append([nx, ny, cnt + 1])
+                
+                elif graph[nx][ny] == shark_size:
+                    que.append([nx, ny, cnt + 1])
+                
+                elif graph[nx][ny] == 0:
+                    que.append([nx, ny, cnt + 1])
+
                 visited[nx][ny] = True
-                if graph[nx][ny] < baby_shark and graph[nx][ny] != 0:
-                    fish.append([nx, ny, status[2] + 1])
-                    que.append([nx, ny, status[2] + 1])
-                    visited[nx][ny] = True
-
-                elif graph[nx][ny] == 0 or graph[nx][ny] == baby_shark:
-                    visited[nx][ny] = True
-                    que.append([nx, ny, status[2] + 1])
     
     fish.sort(key=lambda x : (x[2], x[0], x[1]))
     if fish:
+        # print(fish)
         return [fish[0][0], fish[0][1], fish[0][2]]
     else:
         return 0
 
-ans = 0
-eaten = 0
-st_x, st_y = find_start()
-graph[st_x][st_y] = 0
+cnt2 = 0
+# 먹었을때 사이즈 증가되고, 증가되면 0이되기
 
+for i in range(n):
+    for j in range(n):
+        if graph[i][j] == 9:
+            bx = i
+            by = j
+            graph[i][j] = 0
+shark_size = 2
 while True:
-    fishes = bfs(st_x, st_y, baby_shark)
-    if fishes != 0:
-        graph[fishes[0]][fishes[1]] = 0
-        eaten += 1
-        ans += fishes[2]
-
-        if eaten == baby_shark:
-            baby_shark += 1
-            eaten = 0
-        
-        st_x = fishes[0]
-        st_y = fishes[1]
-    
-    else:
+    fff = bfs(bx, by, shark_size)
+    if fff == 0:
         break
+    else:
+        bx = fff[0]
+        by = fff[1]
+        c = fff[2]
+
+        ans += c
+        graph[bx][by] = 0
+        cnt2 += 1
+
+        if cnt2 == shark_size:
+            cnt2 = 0
+            shark_size += 1
 
 print(ans)
