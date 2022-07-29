@@ -62,7 +62,6 @@ while True:
     if chunk == 0:
         ans = 0
         break
-
     # if chunk == 1:
     #     ans = 1
     
