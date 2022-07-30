@@ -4,50 +4,46 @@ from collections import deque
 
 n, m = map(int, input().split())
 
-graph = [[] for _ in range(n)]
-visited = [[[0] * m for _  in range(n)]for _ in range(2)]
-
-for i in range(n):
-    s = input().rstrip()
-    for j in s:
-        graph[i].append(int(j))
+graph = []
+for _ in range(n):
+    graph.append(list(input().rstrip()))
 
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
+
+visited = [[[0] * m for _  in range(n)]for _ in range(2)]
+
 ans = -1
 
 def bfs(x, y):
     global ans
-    one_cnt = 0
+    is_broken = 0
+    move = 1
     que = deque()
-    que.append([one_cnt, x, y, 1])
-    visited[0][0][0] = 1
+    que.append([is_broken, x, y, move])
+    visited[is_broken][x][y] = True
 
     while que:
-        status = que.popleft()
-        if status[1] == n - 1 and status[2] == m - 1:
-            ans = status[3] 
-            break
-        for i in range(4):
-            nx = status[1] + dx[i]
-            ny = status[2] + dy[i]
-            if (0<=nx<n and 0<=ny<m):
+        broken, xx, yy, cnt = que.popleft()
 
-                if graph[nx][ny] == 0 and visited[status[0]][nx][ny] == 0:
-                    visited[status[0]][nx][ny] = 1
-                    que.append([status[0], nx, ny, status[3] + 1])
-                
-                elif graph[nx][ny] == 1:
-                    if status[0] == 0 and visited[0][nx][ny] == 0:
-                        visited[1][nx][ny] = 1 
-                        que.append([status[0] + 1, nx, ny, status[3] + 1])
-       
+        if xx == n - 1 and yy == m - 1:
+            ans = cnt
+            break
         
+        for d in range(4):
+            nx = dx[d] + xx
+            ny = dy[d] + yy
+
+            if 0 <= nx < n and 0 <= ny < m:
+                if graph[nx][ny] == '0' and visited[broken][nx][ny] == 0:
+                    que.append([broken, nx, ny, cnt + 1])
+                    visited[broken][nx][ny] = 1
+                
+                elif graph[nx][ny] == '1' and broken == 0 and visited[broken][nx][ny] == 0:
+                    que.append([broken + 1, nx, ny, cnt + 1])
+                    visited[broken + 1][nx][ny] = 1
+
     return ans
 
-if n == 1 and m == 1:
-    print(1)
-else:
-    print(bfs(0, 0))
-    
 
+print(bfs(0, 0))
