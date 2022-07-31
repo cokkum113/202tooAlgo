@@ -26,4 +26,4 @@ for i in range(1, len(a)):
             dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
             
 #dp[-1]이 4가 나와야지 정상
-print(dp)
+print(max(dp[-1]))
