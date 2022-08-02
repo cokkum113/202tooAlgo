@@ -21,5 +21,5 @@ for i in range(1, n + 1):
             # 클때 처리도 잘 해줘야함
             dp[i][j] = dp[i - 1][j]
 
-print(dp)
+# print(dp)
 print(max(dp[-1]))
