@@ -1,27 +1,29 @@
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10**5)
 
 n, s = map(int, input().split())
 
-nums = list(map(int, input().split()))
+numlist = list(map(int, input().split()))
 
-ans = []
-visited = [False] * (len(nums))
 cnt = 0
-def backtracking(index):
+def backtracking(index, total):
     global cnt
-    if sum(ans) == s:
-        cnt += 1
-        return
 
+    if index == n:
+        return
     
-    for i in range(index, len(nums)):
-        ans.append(nums[i])
-        visited[i] = True
-        backtracking(i + 1)
-        ans.pop()
-        visited[i] = False
+    total += numlist[index]
+
+    if total == s:
+        cnt += 1
     
-backtracking(0)
+    backtracking(index + 1, total)
+    # 현재 numslist[index]를 선택했을 때
+
+    backtracking(index + 1, total - numlist[index])
+    # 현재 numslist[index]를 선택하지 않았을 때
+
+backtracking(0, 0)
 print(cnt)
+
+
