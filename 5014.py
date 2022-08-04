@@ -19,11 +19,11 @@ def bfs(x):
         if xx == g:
             return cnt
 
-        if 1 <= xx + u <= f and visited[xx + u] == False:
+        if xx + u <= f and visited[xx + u] == False:
             que.append([xx + u, cnt + 1])
             visited[xx + u] = True
         
-        if 1 <= xx - d <= f and visited[xx - d] == False:
+        if 1 <= xx - d and visited[xx - d] == False:
             que.append([xx - d, cnt + 1])
             visited[xx - d] = True
 x = bfs(s)            
