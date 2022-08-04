@@ -3,25 +3,17 @@ input = sys.stdin.readline
 
 n, m = map(int, input().split())
 
-visit = [False] * n
+nums = []
 
-ans = []
-def p(st):
-    if st == m:
-        print(*ans)
+def backtracking(index):
+    if len(nums) == m:
+        print(*nums)
         return
     
-    for i in range(n):
-        if visit[i]:
-            continue
-        
-        ans.append(i + 1)
-        p(st + 1)
+    for i in range(1, n + 1):
+        if nums and nums[-1] <= i or not nums:
+            nums.append(i)
+            backtracking(index + 1)
+            nums.pop()
 
-        visit[i] = True
-
-        ans.pop()
-        for j in range(i + 1, n):
-            visit[j] = False
-
-p(0)
+backtracking(0)
