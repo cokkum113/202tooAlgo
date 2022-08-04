@@ -24,4 +24,4 @@ def backtracking(index):
             nums.pop()
             visited[i] = False
     
-print(backtracking(0))
+backtracking(0))
