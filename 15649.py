@@ -12,13 +12,12 @@ def backtracking(index):
         print(*nums)
         return
     
-    for i in range(n):
+    for i in range(1, n + 1):
         if visited[i] == False:
-            nums.append(i + 1)
+            nums.append(i)
             visited[i] = True
             backtracking(index + 1)
             visited[i] = False
             nums.pop()
-
 
 backtracking(0)
