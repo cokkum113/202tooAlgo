@@ -2,20 +2,20 @@ import sys
 input = sys.stdin.readline
 
 n, m = map(int, input().split())
-nums = list(set(map(int, input().split())))
-
-nums.sort()
-ans = []
-
+xlist = list(map(int, input().split()))
+xlist.sort()
+nums = []
+ 
 def backtracking(index):
-    if len(ans) == m:
-        print(*ans)
+    if len(nums) == m:
+        print(*nums)
         return
-    
-    for i in range(len(nums)):
-        if index == 0 or ans[-1] <= nums[i]:
-            ans.append(nums[i])
-            backtracking(index + 1)
-            ans.pop()
-
+    x = 0
+    for i in range(n):
+        if nums and nums[-1] <= xlist[i] or len(nums) == 0:
+            if x != xlist[i]:
+                x = xlist[i]
+                nums.append(xlist[i])
+                backtracking(index + 1)
+                nums.pop()
 backtracking(0)
