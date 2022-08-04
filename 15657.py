@@ -1,28 +1,21 @@
 import sys
 input = sys.stdin.readline
 
-
 n, m = map(int, input().split())
+nums = []
 
-nums = list(map(int, input().split()))
-nums.sort()
-visited = [False] * (n + 1)
-ans = []
+xlist = list(map(int, input().split()))
+xlist.sort()
 
 def backtracking(index):
-
-    if len(ans) == m:
-        print(*ans)
+    if len(nums) == m:
+        print(*nums)
         return
     
-    for i in range(1, n + 1):
-        if visited[i - 1] == False:
-            ans.append(nums[i - 1])
-            visited[i] = True
+    for i in range(n):
+        if nums and nums[-1] <= xlist[i] or not nums:
+            nums.append(xlist[i])
             backtracking(index + 1)
-            ans.pop()
-            visited[i] = False
-            visited[i - 1] = True
-        
+            nums.pop()
 
 backtracking(0)
