@@ -1,42 +1,34 @@
-from curses.ascii import isdigit
+from collections import deque
 import sys
 input = sys.stdin.readline
-from collections import deque
 
-#입력이 10^6이니까 완전 탐색이 아님
+f, s, g, u, d = map(int, input().split())
 
-F, S, G, U, D = map(int, input().split())
+graph = [0] * (f + 1)
+visited = [False] * (f + 1)
 
-visited = [False] * (F + 1)
-
-# 이거 bfs로 풀수 있음, 숨바꼭질처럼!!
-
-def bfs(st):
+def bfs(x):
     que = deque()
-    que.append([st, 0])
-    visited[st] = True
+    que.append([x, 0])
+
+    visited[x] = True
 
     while que:
-        x, cnt = que.popleft()
+        xx, cnt = que.popleft()
 
-        if x == G:
+        if xx == g:
             return cnt
 
-        if x + U <= F and visited[x + U] == False:
-            que.append([x + U, cnt + 1])
-            visited[x + U] = True
-        if 1 <= x - D and visited[x - D] == False:
-            que.append([x - D, cnt + 1])
-            visited[x - D] = True
-
-ans = bfs(S)
-if str(ans).isdigit():
-    print(ans)
+        if 1 <= xx + u <= f and visited[xx + u] == False:
+            que.append([xx + u, cnt + 1])
+            visited[xx + u] = True
+        
+        if 1 <= xx - d <= f and visited[xx - d] == False:
+            que.append([xx - d, cnt + 1])
+            visited[xx - d] = True
+x = bfs(s)            
+if x:
+    print(x)
 else:
     print("use the stairs")
 
-
-
-
-
-    
