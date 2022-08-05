@@ -4,41 +4,34 @@ input = sys.stdin.readline
 n, m = map(int, input().split())
 
 graph = [[] for _ in range(n)]
+visited = [False] * n
 
-for i in range(m):
+for _ in range(m):
     x, y = map(int, input().split())
     graph[x].append(y)
     graph[y].append(x)
 
 flag = False
-visited = [False] * (n)
-
-def backtracking(index, pos):
+# 친구 관계 플래그
+def dfs(current, depth):
     global flag
-    if index >= 4:
+    if depth == 4:
         flag = True
         return
-    
-    visited[pos] = True
 
-    for next in graph[pos]:
+    for next in graph[current]:
         if visited[next] == False:
-            backtracking(index + 1, next)
+            visited[next] = True
+            dfs(next, depth + 1)
             visited[next] = False
-
+        
 for i in range(n):
     visited[i] = True
-    backtracking(0, i)
+    dfs(i, 0)
     visited[i] = False
-    if flag:
-        break
 
 if flag:
-    print(1)
+    print("1")
 else:
-    print(0)
-
-
-
-
+    print("0")
 
