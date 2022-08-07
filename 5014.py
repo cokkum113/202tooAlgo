@@ -4,7 +4,6 @@ input = sys.stdin.readline
 
 f, s, g, u, d = map(int, input().split())
 
-graph = [0] * (f + 1)
 visited = [False] * (f + 1)
 
 def bfs(x):
