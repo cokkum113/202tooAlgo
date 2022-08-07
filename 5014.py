@@ -26,7 +26,7 @@ def bfs(x):
             que.append([xx - d, cnt + 1])
             visited[xx - d] = True
 x = bfs(s)            
-if x:
+if x or x == 0:
     print(x)
 else:
     print("use the stairs")
