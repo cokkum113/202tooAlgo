@@ -9,10 +9,10 @@ remove_x = int(input())
 graph = [[] for _ in range(51)]
 
 for i in range(v):
-    if xlist[i] == -1:
+    if xlist[i] == -1 and i != remove_x:
         graph[50].append(i)
     
-    elif xlist[i] != -1 and xlist[i] != remove_x:
+    elif xlist[i] != -1 and i != remove_x:
         graph[xlist[i]].append(i)
 visited = [False] * 51
 
@@ -25,7 +25,7 @@ def dfs(current):
     
     visited[current] = True
 
-    if len(graph[current]) == 0 and current != remove_x:
+    if len(graph[current]) == 0 and current != remove_x and current != 50:
         cnt += 1
     
     # 다음으로 가기
@@ -33,8 +33,6 @@ def dfs(current):
         dfs(next)
 
     # 여기에도 갔다와서 실행할 코드
-    
-
 
 dfs(50)
 print(cnt)
