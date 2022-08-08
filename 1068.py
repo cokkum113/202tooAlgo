@@ -1,41 +1,40 @@
 import sys
 input = sys.stdin.readline
 
-n = int(input())
+v = int(input())
 xlist = list(map(int, input().split()))
 
 remove_x = int(input())
 
 graph = [[] for _ in range(51)]
 
-for i in range(len(xlist)):
+for i in range(v):
     if xlist[i] == -1:
         graph[50].append(i)
-    else:
+    
+    elif xlist[i] != -1 and xlist[i] != remove_x:
         graph[xlist[i]].append(i)
-
 visited = [False] * 51
-cnt = 0
 
-def dfs(current, remove_x):
+cnt = 0
+def dfs(current):
     global cnt
+    # 여기에 코드 현재시점에서 실행할 코드
     if visited[current]:
         return
-
+    
     visited[current] = True
 
-    if remove_x in graph[current]:
-        graph[current].remove(remove_x)
+    if len(graph[current]) == 0 and current != remove_x:
+        cnt += 1
     
-    if current == remove_x:
-        graph[current] = []
-    
+    # 다음으로 가기
     for next in graph[current]:
-        dfs(next, remove_x)
-    
-    # 여기에 적는 게 현재노드에 상태, 할일!
-    if len(graph[current]) == 0 and current != remove_x and current != 50:
-        cnt += 1 
+        dfs(next)
 
-dfs(50, remove_x)
+    # 여기에도 갔다와서 실행할 코드
+    
+
+
+dfs(50)
 print(cnt)
