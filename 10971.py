@@ -1,41 +1,39 @@
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10**5)
 
 n = int(input())
-
-visited = [False] * n
 graph = []
 for _ in range(n):
     graph.append(list(map(int, input().split())))
+visited = [False] * n
 
 mini = int(1e9)
 total = 0
-
-# 시작점, 끝점
-# 문제 정의 : n까지 다 돌아서 mini값을 찾은 다음에 mini값을 출력
-def backtracking(depth, st, v):
+def dfs(depth, st, j):
     global mini
     global total
-    
-    if depth == n and graph[st][v] != 0:
-        #st에서 v로 오는 길
-        mini = min(total + graph[st][v], mini)
-    
-    for i in range(n):
-        if visited[i] == False and graph[st][i] != 0:
-            total += graph[st][i]
-            visited[i] = True
-            backtracking(depth + 1, i, v)
-            # depth + 1은 OK
-            # i # 시작점이 옮겨간거 OK
-            # v는 끝점이니까 두기
-            visited[i] = False
-            total -= graph[st][i]
+    # 지금 현재 시점에서 할일 1
+    if depth == n - 1 and graph[st][j] != 0:
+        mini = min(mini, total + graph[st][j])
+        print(total)
+        return
 
+    # 다음 노드로 이동하기
+    for next in range(n):
+        if graph[st][next] != 0 and not visited[next]:
+            print(st, next)
+            total += graph[st][next]
+            visited[next] = True
+            dfs(depth + 1, next, j)
+            visited[next] = False
+            total -= graph[st][next]
+    # 돌아와서 해야할 일
+    # if visited[st]:
+    #     return
+    
 for i in range(n):
     visited[i] = True
-    backtracking(1, i, i)
+    dfs(0, i, i)
     visited[i] = False
-
 print(mini)
-
