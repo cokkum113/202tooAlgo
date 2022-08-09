@@ -16,13 +16,13 @@ def dfs(depth, st, j):
     # 지금 현재 시점에서 할일 1
     if depth == n - 1 and graph[st][j] != 0:
         mini = min(mini, total + graph[st][j])
-        print(total)
+        # print(total)
         return
 
     # 다음 노드로 이동하기
     for next in range(n):
         if graph[st][next] != 0 and not visited[next]:
-            print(st, next)
+            # print(st, next)
             total += graph[st][next]
             visited[next] = True
             dfs(depth + 1, next, j)
