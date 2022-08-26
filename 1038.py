@@ -1,17 +1,25 @@
 import sys
 input = sys.stdin.readline
-from itertools import combinations
 
 n = int(input())
-ans = []
-for i in range(1, 11):
-    for c in combinations(range(0, 10), i):
-        combi = list(c)
-        combi.sort(reverse=True)
-        ans.append(int("".join(map(str, combi))))
+if n <= 9:
+    print(n)
+    exit()
+
+cnt = 9
+
+def backtracking(index, limit, nums):
+    global cnt
+    if index == limit:
+        cnt += 1
+        if cnt == n:
+            print(nums)
+            exit()
     
-ans.sort()
-if n >=  1023:
-    print(-1)
-else:
-    print(ans[n])
+    for i in range(int(nums[-1])):
+        backtracking(index + 1, limit, nums + str(i))
+
+for i in range(1, 11):
+    for j in range(1, 10):
+        backtracking(0, i, str(j))
+print(-1)
