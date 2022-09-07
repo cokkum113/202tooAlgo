@@ -1,6 +1,4 @@
 from collections import deque
-from operator import le
-from syslog import LOG_EMERG
 
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
