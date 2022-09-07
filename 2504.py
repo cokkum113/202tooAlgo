@@ -5,6 +5,24 @@ ss = input().rstrip()
 st = []
 ch = []
 
+cnt1 = 0
+cnt2 = 0
+
+# for i in ss:
+#     if i == '(':
+#         cnt1 += 1
+
+#     elif i == ')':
+#         cnt1 -= 1
+
+#     if i == '[':
+#         cnt2 += 1
+#     elif i == ']':
+#         cnt2 -= 1
+# if cnt1 != 0 or cnt2 != 0:
+#     print(0)
+#     exit()
+
 for i in ss:
     if i == '(' or i == '[':
         ch.append(i)
@@ -54,5 +72,3 @@ for i in ss:
                 st.append(3)
 
 print(sum(st))
-                
-            
