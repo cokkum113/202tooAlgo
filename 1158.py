@@ -13,12 +13,11 @@ aa = []
 cnt = 0
 while que:
     cnt += 1
+    x = que.popleft()
     if cnt % k == 0:
-        x = que.popleft()
         aa.append(str(x))
         
     else:
-        x = que.popleft()
         que.append(x)
 
 

@@ -1,45 +1,60 @@
+from collections import deque
 import sys
 input = sys.stdin.readline
-from collections import deque
 
 t = int(input())
 
 for _ in range(t):
-    s = input()
+    s = input().rstrip()
     n = int(input())
     nums = input().rstrip()
-    nums = nums[1:-1]
-    nums = nums.split(',')
-    nums = deque(nums)
-
-    # print(len(nums))
-    # deque는 빈배열도 1이었음,,,,,,,,
-    # 대박.
-
-    flag = 0
-    even = 0
-
-    if n == 0:
-        nums = deque()
-
+    flag = False
+    flag2 = False
     for i in s:
-        if i == 'R':
-            even += 1
-        elif i == 'D':
-            if len(nums) == 0:
-                flag = 1
-                print('error')
-                break
-            else:
-                if even % 2 == 0:
-                    nums.popleft()
-                else:
-                    nums.pop()
+        if i == 'D':
+            flag2 = True
+            break
     
-    if flag == 0:
-        if even % 2 == 0:
-            print('[' + ','.join(nums) + ']')
+    if n == 0:
+        if not flag2:
+            print([])
+            continue
+        elif flag2:
+            print('error')
+            continue
+    else:
+        nums = nums[1:-1]
+        nums = nums.split(',')
+        nums = deque(nums)
+
+        rcnt = 0
+        for i in s:
+            if i == 'R':
+                rcnt += 1
+            
+            elif i == 'D':
+                if nums:
+                    if rcnt % 2 == 0:
+                        nums.popleft()
+                    else:
+                        nums.pop()
+                else:
+                    flag = True
+                    break
+                    
+        if flag:
+            print('error')
         else:
-            nums = list(nums)
-            nums = nums[::-1]
-            print('[' + ','.join(nums) + ']')
+            if rcnt % 2 == 0:
+                print("[", end="")
+                print(",".join(nums), "]", sep='')
+            else:
+                nums = list(nums)
+                nums = nums[::-1]
+                print("[", end="")
+                print(",".join(nums), "]", sep='')
+
+             
+        
+
+
