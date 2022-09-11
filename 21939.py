@@ -34,12 +34,10 @@ def recommend(heap):
                     diction[xx] = 0
         heapq.heappop(heap)
         
-
         
 m = int(input())
 for _ in range(m):
     ss = input().rstrip().split()
-    # 파라미터로  heap만 넣게 하기, 함수로 빼기
     if ss[0] == "recommend":
         if ss[1] == "1":
             print(recommend(maxiheap))
