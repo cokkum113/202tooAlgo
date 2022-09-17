@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+from collections import deque
 
 # 하나 주고 -> 쌓아두고 -> 이것을 같이 하지 않을 것
 
@@ -11,12 +12,11 @@ input = sys.stdin.readline
 u, v = map(int, input().split())
 
 tree = [[] for _ in range(u + 1)]
+
 for _ in range(u - 1):
     x, y = map(int, input().split())
-    if x < y :
-        tree[x].append(y)
-    else:
-        tree[y].append(x)
+    tree[x].append(y)
+    tree[y].append(x)
 
 cnt = 0
 for i in range(1, len(tree)):
