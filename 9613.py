@@ -20,6 +20,3 @@ for _ in range(t):
         total += gcd(maxi, mini)
     
     print(total)
-
-
-    

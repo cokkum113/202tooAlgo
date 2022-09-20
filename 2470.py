@@ -8,7 +8,7 @@ nums.sort()
 
 lo = 0
 hi = n - 1
-mini = int(1e9)
+mini = int(1e10) + 1
 
 xx = nums[lo] + nums[hi]
 ans = []
