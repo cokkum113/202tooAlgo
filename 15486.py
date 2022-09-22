@@ -12,31 +12,15 @@ for i in range(n):
 
 dp = [0] * (n + 2)
 
-# dp[1] = 0
-# dp[2] = 0
-# dp[3] = 0
-# dp[4] = 10
-
-# dp[2] = 0
-# dp[3] = 0
-# dp[4] = 0
-# dp[5] = 0
-# dp[6] = 0
-# dp[7] = 20
-
-# dp[1] = 0
-# dp[2] = 0
-# dp[3] = 0
-# dp[4] = 10
-
-# dp[1] = 0
-# dp[2] = 0
-# dp[3] = 0
-# dp[4] = 0
-# dp[5] = 20
-
+# 상담을 시작한 경우와 시작 하지 않은 경우
 for i in range(1, n + 1):
+    dp[i] = max(dp[i - 1], dp[i])
     if i + day[i] <= n + 1:
-        dp[i] = max(val[i + day[i]], dp[i] + val[i])
+        # 오늘 상담을 시작하지 않은 경우에 먼저 답이 있을 수 있음.
+        dp[i + day[i]] = max(val[i] + dp[i], dp[i + day[i]])
+        # dp에 값을 어떻게 저장하면 좋을까 
+        # 값이 더해지도록
+    
+# print(dp)
 
-print(dp)
+print(dp[-1])
