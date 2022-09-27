@@ -2,48 +2,50 @@ import sys
 input = sys.stdin.readline
 from collections import deque
 
-n, k = map(int, input().split())
+def step1(que1):
+    que1.appendleft(que1.pop())
 
-belts = deque(list(map(int, input().split())))
-
-robot_flag = deque(list(False for _ in range(2*n)))
-
-
-def rotation(belts):
-    x = belts.pop()
-    belts.appendleft(x)
-    y = robot_flag.pop()
-    robot_flag.appendleft(y)
-
-def robot_rotation(belts, robot_flag):
+def step2(que1, n):
     for i in range(n - 2, -1, -1):
-        if belts[i + 1] >= 1 and robot_flag[i] == True and robot_flag[i + 1] == False:
-            robot_flag[i] = False
-            robot_flag[i + 1] = True
-            belts[i + 1] -= 1
+        if que1[i + 1][0] >= 1 and que1[i][1] == 1 and que1[i + 1][1] == 0:
+            que1[i + 1][0] -= 1
+            que1[i][1] = 0
+            que1[i + 1][1] = 1
         else:
             continue
+    
+def put(que1):
+    if que1[0][0] >= 1 and que1[0][1] == 0:
+        que1[0][1] = 1
+        que1[0][0] -= 1
+def delete(que1, n):
+    if que1[n - 1][1] == 1:
+        que1[n - 1][1] = 0
 
-def put_robot(belts, robot_flag):
-    if belts[0] >= 1 and robot_flag[0] == False:
-        belts[0] -= 1
-        robot_flag[0] = True
+n, k = map(int, input().split())
+cnt = 0
+ll = list(map(int, input().split()))
 
-def delet_robot(robot_flag):
-    if robot_flag[n - 1] == True:
-        robot_flag[n - 1] = False
+que = deque()
+for i in ll:
+    que.append([i, 0])
 
-ans = 0
 while True:
-    ans += 1
+    cnt += 1
+    
+    step1(que)
+    delete(que, n)
+    step2(que, n)
+    put(que)
+    delete(que, n)
 
-    rotation(belts)
-    delet_robot(robot_flag)
-    robot_rotation(belts, robot_flag)
-    put_robot(belts, robot_flag)
-    delet_robot(robot_flag)
-
-    if belts.count(0) >= k:
+    zero = 0
+    for i in que:
+        if i[0] == 0:
+            zero += 1
+    if zero >= k:
         break
 
-print(ans)
+    
+print(cnt)
+
